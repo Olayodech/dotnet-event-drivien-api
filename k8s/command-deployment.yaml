@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commandservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: commandservice-deployment
+  template:
+    metadata:
+      labels:
+        app: commandservice-deployment
+    spec:
+      containers:
+      - name: commandservice-deployment
+        image: olayodech/commandservice:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: commands-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: commandservice-deployment
+  ports:
+  - name: commandservice-deployment
+    protocol: TCP
+    port: 80
+    targetPort: 80

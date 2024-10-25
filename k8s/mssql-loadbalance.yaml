@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metada:
+  name: mssql-loadbalancer-service-1
+spec:
+  type: LoadBalancer
+  selector:
+    app: mssql
+  ports:
+  - protocol: TCP
+    port: 1433
+    targetPort: 1433
